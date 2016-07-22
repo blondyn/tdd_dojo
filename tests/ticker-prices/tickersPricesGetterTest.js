@@ -10,9 +10,11 @@ describe('tickerPrices test', function () {
             assert.deepEqual(tickers, ['A', 'B', 'C']);
             return Promise.resolve([0,1,2]);
         };
-        const tickerPricesGetter = tickerPricesGetterFactory(fetcher);
 
-        const tickerNames = ['A', 'B', 'C']
+        var dummyFormatter = function(input) { return input };
+        const tickerPricesGetter = tickerPricesGetterFactory(fetcher, dummyFormatter);
+
+        const tickerNames = ['A', 'B', 'C'];
         const result = yield tickerPricesGetter(tickerNames);
 
         assert.deepEqual(result, [['A', 0], ['B', 1], ['C', 2]]);
