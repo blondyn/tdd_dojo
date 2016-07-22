@@ -4,19 +4,12 @@ require('co-mocha');
 
 describe('ticker reader test', function () {
     it('should read testFile successfully', function *() {
-        var fsStub = function(filename) {
-            return {
-                readFile: function(filename, charset, cb) {
-                    assert(filename.endsWith("tests/testFile"));
+        var readFileStub = function(filename) {
+            assert(filename.endsWith("tests/testFile"));
+            return Promise.resolve('foo\nbar\n');
+        };
 
-                    var stubbedFileContent = 'foo\nbar\n';
-
-                    cb(null, stubbedFileContent);
-                }
-            }
-        }();
-
-        var tickerReader = require('../tickerReader')(fsStub);
+        var tickerReader = require('../tickerReader')(readFileStub);
 
         var expected = ['foo', 'bar'];
 
