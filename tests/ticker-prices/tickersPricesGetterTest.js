@@ -7,6 +7,7 @@ const tickerPricesGetterFactory = require(SRC + 'tickerPricesGetter');
 describe('tickerPrices test', function () {
     it('should pass', function *() {
         const fetcher = function(tickers) {
+            assert.deepEqual(tickers, ['A', 'B', 'C']);
             return Promise.resolve([0,1,2]);
         };
         const tickerPricesGetter = tickerPricesGetterFactory(fetcher);
