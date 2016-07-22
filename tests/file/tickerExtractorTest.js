@@ -1,7 +1,9 @@
 var assert = require('assert');
 var path = require('path');
 
-const ticker = require('../tickerExtractor')([]);
+const SRC = '../../lib/file/';
+
+const ticker = require(SRC + 'tickerExtractor')([]);
 describe('tickerExtractor test', function () {
     it('should return input as an array', function (done) {
         var inputStream = 'foo\nbar\n';
@@ -26,7 +28,7 @@ describe('tickerExtractor test', function () {
     });
 
     it('should filter out empty items', function (done) {
-        const tickerWithBlacklist = require('../tickerExtractor')(['INVALID']);
+        const tickerWithBlacklist = require(SRC + 'tickerExtractor')(['INVALID']);
         var inputStream = 'foo\nINVALID\n';
 
         const actual = tickerWithBlacklist(inputStream);

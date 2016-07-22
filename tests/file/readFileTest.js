@@ -2,6 +2,8 @@ var assert = require('assert');
 var path = require('path');
 require('co-mocha');
 
+const SRC = '../../lib/file/';
+
 describe('readFile test', function () {
     it('should invoke real fs and read successfully', function *() {
         const fsStub = {
@@ -9,7 +11,7 @@ describe('readFile test', function () {
                     cb(null, 'foo\nbar\n');
                 }
         };
-        const readFile = require('../readFile')(fsStub);
+        const readFile = require(SRC + 'readFile')(fsStub);
 
         const actual = yield readFile(path.join(__dirname, 'testFile'));
         assert.equal(typeof actual, 'string');
@@ -22,7 +24,7 @@ describe('readFile test', function () {
                 cb(new Error("Meaningless error"));
             }
         };
-        const readFile = require('../readFile')(fsStub);
+        const readFile = require(SRC + 'readFile')(fsStub);
 
         try {
             yield readFile('notexisting');
