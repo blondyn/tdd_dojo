@@ -4,25 +4,25 @@ require('co-mocha');
 
 describe('readFile test', function () {
     it('should invoke real fs and read successfully', function *() {
-        var readFileStub = {
+        const fsStub = {
                 readFile: function(path, enc, cb) {
                     cb(null, 'foo\nbar\n');
                 }
         };
-        var readFile = require('../readFile')(readFileStub);
+        const readFile = require('../readFile')(fsStub);
 
-        var actual = yield readFile(path.join(__dirname, 'testFile'));
+        const actual = yield readFile(path.join(__dirname, 'testFile'));
         assert.equal(typeof actual, 'string');
         assert.deepEqual('foo\nbar\n', actual);
     });
 
     it('should throw with proper message when file not found', function *() {
-        var readFileStub = {
+        const fsStub = {
             readFile: function(path, enc, cb) {
                 cb(new Error("Meaningless error"));
             }
         };
-        var readFile = require('../readFile')(readFileStub);
+        const readFile = require('../readFile')(fsStub);
 
         try {
             yield readFile('notexisting');

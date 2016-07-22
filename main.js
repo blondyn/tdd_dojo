@@ -1,5 +1,7 @@
+var fs = require('fs');
+
 var stockfetch = require('./stockfetch');
-var readFile = require('./readFile');
+var readFile = require('./readFile')(fs);
 
 var tickerReader = require('./tickerReader')(readFile);
 var tickerPricesGetter = require('./ticketPricesGetter');
