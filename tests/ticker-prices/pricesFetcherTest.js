@@ -23,4 +23,18 @@ describe('tickerPrices test', function () {
 
         assert.deepEqual(prices, [1,2, 3]);
     })
+
+    it('should return 404 error', function *() {
+        const baseUrl = "http://example.net";
+
+        const request = function(fullUrl) {
+            return Promise.reject(new Error("Not found"))
+        };
+
+        const pricesFetcher = pricesFetcherFactory(request, baseUrl);
+        const message = yield pricesFetcher(['A', 'B']);
+
+        assert.deepEqual(message, ["Not found", "Not found"]);
+    })
+
 });
