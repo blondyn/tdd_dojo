@@ -18,7 +18,6 @@ describe('End to end test', function() {
             return Promise.resolve(prices);
         };
 
-
         return stockfetch('./test', fileReader, tickerPricesGetter).then(function(prices) {
             assert.deepEqual(prices, [0,1]);
         });

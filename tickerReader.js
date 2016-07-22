@@ -2,24 +2,19 @@ module.exports = tickerReader;
 fs = require('fs'); readline = require('readline');
 
 function tickerReader(filename) {
-    var results = [];
-    var input = '';
+    return new Promise(function (resolve, reject) {
+        fs.readFile(filename, 'utf8', function (err, data) {
+            if (err) {
+                reject(err);
+            }
 
-    input = fs.readFileSync(filename, 'utf8');
+            var results = data.split("\n");
 
-    results = input.split("\n");
+            var filteredResults = results.filter(function(item) {
+               return item.length > 0;
+            });
 
-    return results;
-    // function readLine(cb) {
-    //     readline.createInterface({
-    //         input: fs.createReadStream(filename),
-    //         terminal: false
-    //     }).on('line', function(line) {
-    //         if (line != 'INVALID') {
-    //             results.push(line);
-    //         }
-    //     }).on('close', function() {
-    //         cb(results);
-    //     });
-    // }
+            resolve(filteredResults);
+        });
+    });
 }
