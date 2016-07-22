@@ -1,27 +1,12 @@
-fs = require('fs'); readline = require('readline');
-const findStockPriceByid = require("./request");
+var stockfetch = require('./stockfetch');
 
-var filename = 'input';
-var results = [];
+var fileReader = require('./tickerReader');
+var tickerPricesGetter = require('./ticketPricesGetter');
 
-function readLine(cb) {
-    readline.createInterface({
-        input: fs.createReadStream(filename),
-        terminal: false
-    }).on('line', function(line) {
-        //console.log("Read " + line);
-        if (line != 'INVALID') {
-            results.push(line);
-        }
-    }).on('close', function() {
-        cb(results);
-    });
-}
+var output = stockfetch('input', fileReader, tickerPricesGetter);
+tickers = output[0]; prices = output[1];
 
-readLine(function(result) {
-    result.forEach(function(stockId) {
-        findStockPriceByid(stockId);
-    });
-});
+console.log(tickers);
+console.log(prices);
 
 
