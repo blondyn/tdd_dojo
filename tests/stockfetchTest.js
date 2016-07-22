@@ -1,8 +1,8 @@
 var assert = require('assert');
+require('co-mocha');
 
-describe('End to end test', function() {
-    it('should work', function () {
-        var stockfetch = require('../stockfetch');
+describe('Stockfetch end to end test', function () {
+    it('should work', function *() {
 
         var fileReader = function(filename) {
             assert(filename, './test');
@@ -18,8 +18,9 @@ describe('End to end test', function() {
             return Promise.resolve(prices);
         };
 
-        return stockfetch('./test', fileReader, tickerPricesGetter).then(function(prices) {
-            assert.deepEqual(prices, [0,1]);
-        });
+        var stockfetch = require('../stockfetch');
+
+        var prices = yield stockfetch('./test', fileReader, tickerPricesGetter);
+        assert.deepEqual(prices, [0,1]);
     });
 });
