@@ -17,5 +17,6 @@ describe('End to end test', function() {
         tickers = output[0]; prices = output[1];
 
         assert.deepEqual(['foo', 'bar'], tickers);
+        assert.deepEqual([0, 1], prices);
     });
 });
