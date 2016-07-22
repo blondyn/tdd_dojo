@@ -4,7 +4,7 @@ var stockfetch = require('./stockfetch');
 var readFile = require('./readFile')(fs);
 
 var tickerReader = require('./tickerReader')(readFile);
-var tickerPricesGetter = require('./ticketPricesGetter');
+var tickerPricesGetter = require('./lib/ticker-prices/ticketPricesGetter');
 
 
 var output = stockfetch('input', tickerReader, tickerPricesGetter);
