@@ -1,4 +1,5 @@
 var assert = require('assert');
+var path = require('path');
 
 describe('ticker reader test', function() {
     it('should work', function () {
@@ -6,7 +7,7 @@ describe('ticker reader test', function() {
 
         var expected = ['foo', 'bar'];
 
-        return tickerReader('tests/testFile').then(function(actual) {
+        return tickerReader(path.join(__dirname, 'testFile')).then(function(actual) {
             assert.deepEqual(expected, actual);
         });
     });
