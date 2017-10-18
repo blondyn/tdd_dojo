@@ -1,0 +1,24 @@
+{
+  "name": "tdd_coding",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "co-mocha": "1.1.2",
+    "good-guy-http": "1.7.2",
+    "lodash.zip": "4.0.0",
+    "request": "2.73.0"
+  },
+  "devDependencies": {
+    "mocha": "2.5.3"
+  },
+  "scripts": {
+    "test": "mocha --recursive tests/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "repo-to-be.git.com"
+  },
+  "author": "",
+  "license": "ISC"
+}
